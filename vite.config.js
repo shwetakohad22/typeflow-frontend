@@ -7,11 +7,11 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "http://localhost:5005",
+        target: "https://typeflow-backend.onrender.com",
         changeOrigin: true,
       },
       "/socket.io": {
-        target: "http://localhost:5005",
+        target: "https://typeflow-backend.onrender.com",
         ws: true,
       },
     },
