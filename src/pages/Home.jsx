@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import TypingTest from "../components/TypingTest";
 import axios from "axios";
 import { useGlobal } from "../context/GlobalContext";
-import { Zap, Target, Clock } from "lucide-react";
+import { Zap, Target, Clock, Trophy, Settings } from "lucide-react";
+import { motion } from "framer-motion";
 
 const Home = () => {
   const { user } = useGlobal();
@@ -35,69 +36,109 @@ const Home = () => {
   };
 
   return (
-    <div className="h-full flex flex-col items-center justify-center px-4 overflow-hidden">
-      {/* Header Section */}
-      <div className="text-center mb-8 space-y-2 animate-fade-in">
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-100 tracking-tight">
-          Test Your Speed
-        </h1>
-        <p className="text-lg text-gray-400 font-medium">
-          Choose your settings and start typing
-        </p>
+    <div className="h-screen max-h-screen flex flex-col relative overflow-hidden bg-dark transition-colors duration-300">
+      {/* Background Elements */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-[100px] animate-pulse-glow"></div>
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent/5 rounded-full blur-[120px]"></div>
       </div>
 
-      {/* Control Panel */}
-      <div className="mb-8 animate-fade-in animation-delay-100">
-        <div className="bg-dark-card p-2 rounded-xl border border-white/5 flex flex-wrap justify-center gap-2 shadow-xl">
-          {/* Duration Selector */}
-          <div className="bg-dark p-1 rounded-lg flex items-center gap-1">
-            {[15, 30, 60, 120].map((d) => (
-              <button
-                key={d}
-                onClick={() => setDuration(d)}
-                className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${
-                  duration === d
-                    ? "bg-primary text-dark shadow-sm"
-                    : "text-gray-400 hover:text-gray-200 hover:bg-white/5"
-                }`}
-              >
-                {d}s
-              </button>
-            ))}
+      {/* Main Content */}
+      <div className="relative z-10 container mx-auto px-4 flex-1 flex flex-col justify-center items-center h-full">
+
+        {/* Header Section */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-8 space-y-2"
+        >
+          <div className="inline-block px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-[10px] font-medium text-primary mb-1 tracking-wide uppercase">
+            Enhance Your Workflow
           </div>
+          <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white dark:text-white text-gray-900 drop-shadow-lg">
+            Type<span className="text-primary">Flow</span>
+          </h1>
+          <p className="text-sm md:text-base text-gray-600 dark:text-gray-400 font-medium max-w-2xl mx-auto leading-relaxed">
+            Master the art of speed typing.
+          </p>
+        </motion.div>
 
-          <div className="w-px bg-white/10 my-1 mx-2"></div>
+        {/* Control Panel */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
+          className="mb-8 w-full max-w-md"
+        >
+          <div className="glass rounded-full p-2 flex justify-between items-center shadow-2xl">
+            {/* Duration Selector */}
+            <div className="flex gap-1 bg-black/10 dark:bg-black/20 rounded-full p-1">
+              {[15, 30, 60].map((d) => (
+                <button
+                  key={d}
+                  onClick={() => setDuration(d)}
+                  className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all duration-300 ${duration === d
+                    ? "bg-primary text-white shadow-lg scale-105" // text-white is explicit for active state
+                    : "text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-white/20"
+                    }`}
+                >
+                  <span className="flex items-center gap-1.5">
+                    <Clock size={12} className={duration === d ? "opacity-100" : "opacity-0 w-0 overflow-hidden transition-all"} />
+                    {d}s
+                  </span>
+                </button>
+              ))}
+            </div>
 
-          {/* Difficulty Selector */}
-          <div className="bg-dark p-1 rounded-lg flex items-center gap-1">
-            {["easy", "medium", "hard"].map((diff) => (
-              <button
-                key={diff}
-                onClick={() => setDifficulty(diff)}
-                className={`px-4 py-1.5 rounded-md text-sm font-medium capitalize transition-all ${
-                  difficulty === diff
-                    ? "bg-primary text-dark shadow-sm"
-                    : "text-gray-400 hover:text-gray-200 hover:bg-white/5"
-                }`}
-              >
-                {diff}
-              </button>
-            ))}
+            <div className="h-4 w-px bg-gray-300 dark:bg-white/10 mx-2"></div>
+
+            {/* Difficulty Selector */}
+            <div className="flex gap-1 bg-black/10 dark:bg-black/20 rounded-full p-1">
+              {["easy", "medium", "hard"].map((diff) => (
+                <button
+                  key={diff}
+                  onClick={() => setDifficulty(diff)}
+                  className={`px-3 py-1.5 rounded-full text-xs font-semibold capitalize transition-all duration-300 ${difficulty === diff
+                    ? "bg-primary text-white shadow-lg scale-105"
+                    : "text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-white/20"
+                    }`}
+                >
+                  <span className="flex items-center gap-1.5">
+                    <Target size={12} className={difficulty === diff ? "opacity-100" : "opacity-0 w-0 overflow-hidden transition-all"} />
+                    {diff}
+                  </span>
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
+        </motion.div>
+
+        {/* Typing Test Component */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.6 }}
+          className="w-full max-w-5xl relative"
+        >
+          {/* Decorative blurs behind the card */}
+          <div className="absolute -inset-4 bg-gradient-to-r from-primary to-accent opacity-20 blur-2xl rounded-[3rem] -z-10"></div>
+
+          <TypingTest
+            key={`${duration}-${difficulty}`}
+            duration={duration}
+            difficulty={difficulty}
+            onFinish={handleTestFinish}
+            isLoggedIn={!!user}
+            onSaveLogin={handleLoginSave}
+          />
+        </motion.div>
       </div>
 
-      {/* Typing Test Component */}
-      <div className="w-full max-w-5xl">
-        <TypingTest
-          key={`${duration}-${difficulty}`}
-          duration={duration}
-          difficulty={difficulty}
-          onFinish={handleTestFinish}
-          isLoggedIn={!!user}
-          onSaveLogin={handleLoginSave}
-        />
-      </div>
+      {/* Simple Footer/Info */}
+      <footer className="py-4 text-center text-gray-500 text-xs absolute bottom-0 w-full">
+        <p>Press <span className="px-1.5 py-0.5 rounded bg-gray-200 dark:bg-white/10 text-gray-600 dark:text-gray-300 font-mono text-[10px]">Tab</span> to restart test</p>
+      </footer>
     </div>
   );
 };

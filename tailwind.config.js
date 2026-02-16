@@ -5,12 +5,23 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#14b8a6", // teal-500
-        secondary: "#64748b", // slate-500
-        accent: "#f59e0b", // amber-500
-        danger: "#ef4444", // red-500
-        dark: "#0d1117", // github dark
-        "dark-card": "#161b22", // github dark card
+        primary: "var(--primary-color)",
+        secondary: "var(--secondary-color)",
+        accent: "var(--accent-color)",
+        danger: "var(--danger-color)",
+        dark: "var(--bg-color)",
+        "dark-card": "var(--card-bg)",
+      },
+      fontFamily: {
+        sans: ["var(--font-sans)", "sans-serif"],
+        mono: ["var(--font-mono)", "monospace"],
+      },
+      animation: {
+        "fade-in": "fadeIn 0.5s ease-out forwards",
+        blink: "blink 1s step-end infinite",
+        float: "float 6s ease-in-out infinite",
+        shake: "shake 0.3s ease-in-out",
+        "pulse-glow": "pulse-glow 2s infinite",
       },
     },
   },

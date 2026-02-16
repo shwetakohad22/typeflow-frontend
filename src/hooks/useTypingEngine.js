@@ -1,32 +1,51 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 
-const TEXT_SOURCES = {
-  easy: [
-    "the quick brown fox jumps over the lazy dog",
-    "programming is the art of telling another human what you want the computer to do",
-    "success is not final failure is not fatal it is the courage to continue that counts",
-    "simple sentences are easy to type and good for practice",
-    "coding is fun when you know how to type fast without looking at the keyboard",
-    "javascript is a popular language for web development",
-    "react makes building user interfaces simple and efficient",
-    "practice makes perfect especially when learning a new skill",
-    "always be coding and learning new things every day",
-    "consistency is key to mastering touch typing",
-  ],
-  medium: [
-    "The quick brown fox jumps over the lazy dog. Programming is the art of telling another human what you want the computer to do.",
-    "Success is not final, failure is not fatal: it is the courage to continue that counts.",
-    "In the end, it's not the years in your life that count. It's the life in your years.",
-    "To be yourself in a world that is constantly trying to make you something else is the greatest accomplishment.",
-    "Technology is best when it brings people together. It is not a bug, it is a feature.",
-  ],
-  hard: [
-    "Digital design is like painting, except the paint never dries. The computer was born to solve problems that did not exist before.",
-    "Any fool can write code that a computer can understand. Good programmers write code that humans can understand.",
-    "First, solve the problem. Then, write the code. Experience is the name everyone gives to their mistakes.",
-    "Java is to JavaScript what car is to Carpet. Knowledge is power.",
-    "Optimism is an occupational hazard of programming: feedback is the treatment. Code is like humor. When you have to explain it, it's bad.",
-  ],
+const WORDS = [
+  "the", "be", "of", "and", "a", "to", "in", "he", "have", "it", "that", "for", "they", "i", "with", "as", "not", "on", "she", "at", "by", "this", "we", "you", "do", "but", "from", "or", "which", "one", "would", "all", "will", "there", "say", "who", "make", "when", "can", "more", "if", "no", "man", "out", "other", "so", "what", "time", "up", "go", "about", "than", "into", "could", "state", "only", "new", "year", "some", "take", "come", "these", "know", "see", "use", "get", "like", "then", "first", "any", "work", "now", "may", "such", "give", "over", "think", "most", "even", "find", "day", "also", "after", "way", "many", "must", "look", "before", "great", "back", "through", "long", "where", "much", "should", "well", "people", "down", "own", "just", "because", "good", "each", "those", "feel", "seem", "how", "high", "too", "place", "little", "world", "very", "still", "nation", "hand", "old", "life", "tell", "write", "become", "here", "show", "house", "both", "between", "need", "mean", "call", "develop", "under", "last", "right", "move", "thing", "general", "school", "never", "same", "another", "begin", "while", "number", "part", "turn", "real", "leave", "might", "want", "point", "form", "off", "child", "few", "small", "since", "against", "ask", "late", "home", "interest", "large", "person", "end", "open", "public", "follow", "during", "present", "without", "again", "hold", "govern", "around", "possible", "head", "consider", "word", "program", "problem", "however", "lead", "system", "set", "order", "eye", "plan", "run", "keep", "face", "fact", "group", "play", "stand", "increase", "early", "course", "change", "help", "line"
+];
+
+const generateContent = (difficulty) => {
+  if (difficulty === "easy") {
+    // Random lowercase words, no punctuation
+    let content = "";
+    for (let i = 0; i < 15; i++) {
+      const word = WORDS[Math.floor(Math.random() * WORDS.length)];
+      content += (content ? " " : "") + word;
+    }
+    return content;
+  }
+
+  if (difficulty === "medium") {
+    // Random words, with some capitalization, maybe simple punctuation
+    let content = "";
+    for (let i = 0; i < 12; i++) {
+      let word = WORDS[Math.floor(Math.random() * WORDS.length)];
+      // 20% chance to capitalize
+      if (Math.random() > 0.8) {
+        word = word.charAt(0).toUpperCase() + word.slice(1);
+      }
+      content += (content ? " " : "") + word;
+    }
+    return content; // still largely just words but mixed case
+  }
+
+  if (difficulty === "hard") {
+    // Random words but with punctuation and numbers and complex structures
+    let content = "";
+    for (let i = 0; i < 10; i++) {
+      let word = WORDS[Math.floor(Math.random() * WORDS.length)];
+      if (Math.random() > 0.7) word = word.charAt(0).toUpperCase() + word.slice(1);
+
+      // Add random punctuation
+      if (Math.random() > 0.8) word += ",";
+      else if (Math.random() > 0.9) word += ".";
+
+      content += (content ? " " : "") + word;
+    }
+    return content;
+  }
+
+  return "";
 };
 
 const useTypingEngine = (duration = 60, difficulty = "medium") => {
@@ -43,13 +62,11 @@ const useTypingEngine = (duration = 60, difficulty = "medium") => {
   const timerRef = useRef(null);
 
   const resetTest = useCallback(() => {
-    const source = TEXT_SOURCES[difficulty] || TEXT_SOURCES.medium;
     let generatedText = "";
 
-    // Initial buffer of text (e.g. 50 words)
-    while (generatedText.split(" ").length < 50) {
-      const randomSentence = source[Math.floor(Math.random() * source.length)];
-      generatedText += (generatedText ? " " : "") + randomSentence;
+    // Initial buffer of text (e.g. 50 chars minimum, effectively fetching a few batches)
+    while (generatedText.length < 100) {
+      generatedText += (generatedText ? " " : "") + generateContent(difficulty);
     }
 
     setText(generatedText);
@@ -96,9 +113,7 @@ const useTypingEngine = (duration = 60, difficulty = "medium") => {
     // Infinite Text Generation:
     // If user is within 50 characters of the end, append more text
     if (text.length - value.length < 50) {
-      const source = TEXT_SOURCES[difficulty] || TEXT_SOURCES.medium;
-      const randomSentence = source[Math.floor(Math.random() * source.length)];
-      setText((prev) => prev + " " + randomSentence);
+      setText((prev) => prev + " " + generateContent(difficulty));
     }
 
     // Calculate stats in real-time

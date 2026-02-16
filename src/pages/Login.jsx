@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useGlobal } from "../context/GlobalContext";
-import { Mail, Lock, AlertCircle } from "lucide-react";
+import { Mail, Lock, AlertCircle, Keyboard } from "lucide-react";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -42,18 +42,27 @@ const Login = () => {
   };
 
   return (
-    <div className="flex items-center justify-center h-full px-4">
+    <div className="flex items-center justify-center min-h-[80vh] px-4 relative">
+      {/* Background decorative elements */}
+      <div className="absolute top-1/2 left-1/4 w-64 h-64 bg-primary/10 rounded-full blur-[80px] -translate-y-1/2 -z-10"></div>
+      <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-accent/5 rounded-full blur-[80px] -z-10"></div>
+
       <div className="w-full max-w-md">
         <div className="text-center mb-8 animate-fade-in">
-          <h2 className="text-3xl font-bold text-gray-100 mb-2">
-            Welcome to TypeCraft
+          <div className="flex justify-center mb-4">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg shadow-primary/20">
+              <Keyboard className="w-7 h-7 text-white" />
+            </div>
+          </div>
+          <h2 className="text-3xl font-bold text-white mb-2 tracking-tight">
+            Welcome to Type<span className="text-primary">Flow</span>
           </h2>
           <p className="text-gray-400">
             Sign in to save scores & track progress
           </p>
         </div>
 
-        <div className="bg-dark-card border border-white/5 rounded-2xl shadow-xl overflow-hidden animate-fade-in animation-delay-100">
+        <div className="glass-card overflow-hidden animate-fade-in animation-delay-100 border border-white/10">
           {/* Tabs */}
           <div className="flex border-b border-white/5">
             <button className="flex-1 py-4 text-sm font-bold text-white bg-white/5 border-b-2 border-primary transition-all">
@@ -80,33 +89,39 @@ const Login = () => {
                 <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">
                   Email
                 </label>
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full bg-dark border border-white/10 rounded-lg px-4 py-3 text-gray-200 placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent transition-all"
-                  placeholder="you@example.com"
-                  required
-                />
+                <div className="relative">
+                  <Mail className="absolute left-3 top-3.5 w-5 h-5 text-gray-500" />
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-full bg-dark/50 border border-white/10 rounded-lg pl-10 pr-4 py-3 text-gray-200 placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent transition-all"
+                    placeholder="you@example.com"
+                    required
+                  />
+                </div>
               </div>
 
               <div>
                 <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">
                   Password
                 </label>
-                <input
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="w-full bg-dark border border-white/10 rounded-lg px-4 py-3 text-gray-200 placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent transition-all"
-                  placeholder="••••••••"
-                  required
-                />
+                <div className="relative">
+                  <Lock className="absolute left-3 top-3.5 w-5 h-5 text-gray-500" />
+                  <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="w-full bg-dark/50 border border-white/10 rounded-lg pl-10 pr-4 py-3 text-gray-200 placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent transition-all"
+                    placeholder="••••••••"
+                    required
+                  />
+                </div>
               </div>
 
               <button
                 type="submit"
-                className="w-full bg-primary hover:bg-teal-400 text-dark font-bold py-3.5 rounded-lg transition-all shadow-lg transform active:scale-[0.98] mt-2"
+                className="w-full bg-primary hover:bg-teal-400 text-dark font-bold py-3.5 rounded-lg transition-all shadow-lg shadow-primary/20 hover:shadow-primary/40 transform active:scale-[0.98] mt-2"
               >
                 Sign In
               </button>
