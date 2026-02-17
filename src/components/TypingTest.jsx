@@ -185,41 +185,47 @@ const TypingTest = ({
         animate={{ opacity: 1, scale: 1 }}
         className="max-w-4xl mx-auto w-full"
       >
-        <div className="glass-card p-10 border border-white/10 text-center relative overflow-hidden group">
+        <div className="glass-card p-6 sm:p-10 border border-white/10 text-center relative overflow-hidden group">
           <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
 
-          <h2 className="text-4xl font-bold mb-10 text-white tracking-tight">
+          <h2 className="text-2xl sm:text-4xl font-bold mb-6 sm:mb-10 text-gray-900 dark:text-white tracking-tight">
             Test Completed
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            <div className="p-6 bg-dark/50 rounded-2xl flex flex-col items-center justify-center border border-white/5 hover:border-primary/30 transition-colors">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-12">
+            <div className="p-4 sm:p-6 bg-gray-100 dark:bg-dark/50 rounded-2xl flex flex-col items-center justify-center border border-gray-200 dark:border-white/5 hover:border-primary/30 transition-colors">
               <Zap className="w-8 h-8 text-primary mb-3" />
-              <p className="text-gray-400 text-xs font-bold uppercase tracking-widest mb-1">
+              <p className="text-gray-500 dark:text-gray-400 text-xs font-bold uppercase tracking-widest mb-1">
                 WPM
               </p>
-              <p className="text-6xl font-black text-white">{wpm}</p>
+              <p className="text-4xl sm:text-6xl font-black text-gray-900 dark:text-white">
+                {wpm}
+              </p>
             </div>
-            <div className="p-6 bg-dark/50 rounded-2xl flex flex-col items-center justify-center border border-white/5 hover:border-primary/30 transition-colors">
+            <div className="p-4 sm:p-6 bg-gray-100 dark:bg-dark/50 rounded-2xl flex flex-col items-center justify-center border border-gray-200 dark:border-white/5 hover:border-primary/30 transition-colors">
               <Trophy className="w-8 h-8 text-accent mb-3" />
-              <p className="text-gray-400 text-xs font-bold uppercase tracking-widest mb-1">
+              <p className="text-gray-500 dark:text-gray-400 text-xs font-bold uppercase tracking-widest mb-1">
                 Accuracy
               </p>
-              <p className="text-6xl font-black text-white">{accuracy}%</p>
+              <p className="text-4xl sm:text-6xl font-black text-gray-900 dark:text-white">
+                {accuracy}%
+              </p>
             </div>
-            <div className="p-6 bg-dark/50 rounded-2xl flex flex-col items-center justify-center border border-white/5 hover:border-primary/30 transition-colors">
+            <div className="p-4 sm:p-6 bg-gray-100 dark:bg-dark/50 rounded-2xl flex flex-col items-center justify-center border border-gray-200 dark:border-white/5 hover:border-primary/30 transition-colors">
               <Target className="w-8 h-8 text-secondary mb-3" />
-              <p className="text-gray-400 text-xs font-bold uppercase tracking-widest mb-1">
+              <p className="text-gray-500 dark:text-gray-400 text-xs font-bold uppercase tracking-widest mb-1">
                 CPM
               </p>
-              <p className="text-6xl font-black text-white">{cpm}</p>
+              <p className="text-4xl sm:text-6xl font-black text-gray-900 dark:text-white">
+                {cpm}
+              </p>
             </div>
           </div>
 
-          <div className="flex justify-center gap-4">
+          <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
             <button
               onClick={resetTest}
-              className="group flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-8 py-3 rounded-xl transition-all font-medium border border-white/5"
+              className="group flex items-center justify-center gap-2 bg-gray-200 dark:bg-white/10 hover:bg-gray-300 dark:hover:bg-white/20 text-gray-700 dark:text-white px-6 sm:px-8 py-3 rounded-xl transition-all font-medium border border-gray-300 dark:border-white/5"
             >
               <RotateCcw className="w-5 h-5 group-hover:-rotate-180 transition-transform duration-500" />
               Try Again
@@ -246,21 +252,21 @@ const TypingTest = ({
       onClick={() => inputRef.current?.focus()}
     >
       {/* HUD / Stats Bar */}
-      <div className="flex justify-between items-center mb-4 px-4 text-gray-500 dark:text-gray-400 font-mono text-sm select-none">
-        <div className="flex gap-8">
+      <div className="flex justify-between items-center mb-3 sm:mb-4 px-2 sm:px-4 text-gray-500 dark:text-gray-400 font-mono text-xs sm:text-sm select-none">
+        <div className="flex gap-4 sm:gap-8">
           <div
             className={`transition-all duration-300 ${timeLeft < 10 ? "text-danger animate-pulse" : "text-primary"}`}
           >
             <span className="text-xs uppercase tracking-wider opacity-70">
               Time:
             </span>{" "}
-            <span className="font-bold text-xl">{timeLeft}</span>
+            <span className="font-bold text-base sm:text-xl">{timeLeft}</span>
           </div>
           <div>
             <span className="text-xs uppercase tracking-wider opacity-70">
               WPM:
             </span>{" "}
-            <span className="font-bold text-xl text-gray-800 dark:text-gray-200">
+            <span className="font-bold text-base sm:text-xl text-gray-800 dark:text-gray-200">
               {wpm}
             </span>
           </div>
@@ -287,7 +293,7 @@ const TypingTest = ({
 
       {/* Typing Area - Container for Masking */}
       <div
-        className={`relative rounded-2xl border transition-all duration-300 h-[100px] flex items-center shadow-lg overflow-hidden
+        className={`relative rounded-xl sm:rounded-2xl border transition-all duration-300 h-[80px] sm:h-[100px] flex items-center shadow-lg overflow-hidden
         ${isFocused ? "border-primary/30 shadow-primary/5" : "border-gray-200 dark:border-white/5"}
         `}
         style={{
@@ -299,7 +305,7 @@ const TypingTest = ({
       >
         {/* Scrolling Content Wrapper */}
         <motion.div
-          className="relative z-0 font-mono text-3xl md:text-4xl whitespace-nowrap will-change-transform flex items-center"
+          className="relative z-0 font-mono text-xl sm:text-3xl md:text-4xl whitespace-nowrap will-change-transform flex items-center"
           animate={{ x: -scrollOffset }}
           transition={{
             type: "spring",

@@ -2,7 +2,13 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useGlobal } from "../context/GlobalContext";
-import { Mail, Lock, User as UserIcon, AlertCircle, Keyboard } from "lucide-react";
+import {
+  Mail,
+  Lock,
+  User as UserIcon,
+  AlertCircle,
+  Keyboard,
+} from "lucide-react";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -48,7 +54,7 @@ const Register = () => {
               <Keyboard className="w-7 h-7 text-white" />
             </div>
           </div>
-          <h2 className="text-3xl font-bold text-white mb-2 tracking-tight">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-2 tracking-tight">
             Join Type<span className="text-primary">Flow</span>
           </h2>
           <p className="text-gray-400">
@@ -56,12 +62,12 @@ const Register = () => {
           </p>
         </div>
 
-        <div className="glass-card overflow-hidden animate-fade-in animation-delay-100 border border-white/10">
+        <div className="glass-card overflow-hidden animate-fade-in animation-delay-100 border border-gray-200 dark:border-white/10">
           {/* Tabs */}
           <div className="flex border-b border-white/5">
             <Link
               to="/login"
-              className="flex-1 py-4 text-center text-sm font-bold text-gray-500 hover:text-gray-300 transition-all hover:bg-white/5"
+              className="flex-1 py-4 text-center text-sm font-bold text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-all hover:bg-black/5 dark:hover:bg-white/5"
             >
               Login
             </Link>
@@ -70,7 +76,7 @@ const Register = () => {
             </button>
           </div>
 
-          <div className="p-8">
+          <div className="p-5 sm:p-8">
             {error && (
               <div className="bg-red-500/10 border border-red-500/20 text-red-400 p-4 rounded-lg mb-6 flex items-start gap-3">
                 <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
@@ -89,7 +95,8 @@ const Register = () => {
                     type="text"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
-                    className="w-full bg-dark/50 border border-white/10 rounded-lg pl-10 pr-4 py-3 text-gray-200 placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent transition-all"
+                    className="w-full border border-gray-300 dark:border-white/10 rounded-lg pl-10 pr-4 py-3 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent transition-all"
+                    style={{ backgroundColor: "var(--input-bg)" }}
                     placeholder="Choose a username"
                     required
                     minLength={3}
@@ -107,7 +114,8 @@ const Register = () => {
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full bg-dark/50 border border-white/10 rounded-lg pl-10 pr-4 py-3 text-gray-200 placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent transition-all"
+                    className="w-full border border-gray-300 dark:border-white/10 rounded-lg pl-10 pr-4 py-3 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent transition-all"
+                    style={{ backgroundColor: "var(--input-bg)" }}
                     placeholder="you@example.com"
                     required
                   />
@@ -124,7 +132,8 @@ const Register = () => {
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full bg-dark/50 border border-white/10 rounded-lg pl-10 pr-4 py-3 text-gray-200 placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent transition-all"
+                    className="w-full border border-gray-300 dark:border-white/10 rounded-lg pl-10 pr-4 py-3 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent transition-all"
+                    style={{ backgroundColor: "var(--input-bg)" }}
                     placeholder="Create a strong password"
                     required
                     minLength={6}

@@ -54,7 +54,7 @@ const Login = () => {
               <Keyboard className="w-7 h-7 text-white" />
             </div>
           </div>
-          <h2 className="text-3xl font-bold text-white mb-2 tracking-tight">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-2 tracking-tight">
             Welcome to Type<span className="text-primary">Flow</span>
           </h2>
           <p className="text-gray-400">
@@ -62,7 +62,7 @@ const Login = () => {
           </p>
         </div>
 
-        <div className="glass-card overflow-hidden animate-fade-in animation-delay-100 border border-white/10">
+        <div className="glass-card overflow-hidden animate-fade-in animation-delay-100 border border-gray-200 dark:border-white/10">
           {/* Tabs */}
           <div className="flex border-b border-white/5">
             <button className="flex-1 py-4 text-sm font-bold text-white bg-white/5 border-b-2 border-primary transition-all">
@@ -70,13 +70,13 @@ const Login = () => {
             </button>
             <Link
               to="/register"
-              className="flex-1 py-4 text-center text-sm font-bold text-gray-500 hover:text-gray-300 transition-all hover:bg-white/5"
+              className="flex-1 py-4 text-center text-sm font-bold text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-all hover:bg-black/5 dark:hover:bg-white/5"
             >
               Register
             </Link>
           </div>
 
-          <div className="p-8">
+          <div className="p-5 sm:p-8">
             {error && (
               <div className="bg-red-500/10 border border-red-500/20 text-red-400 p-4 rounded-lg mb-6 flex items-start gap-3">
                 <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
